@@ -1,0 +1,4 @@
+#!/bin/bash
+set -eu
+
+docker build --build-arg mlflow_version=$DOCKER_TAG -t $IMAGE_NAME .
