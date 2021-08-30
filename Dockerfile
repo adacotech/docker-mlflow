@@ -14,8 +14,8 @@ ARG mlflow_version
 # poetry install
 WORKDIR ${APP_PATH}
 COPY . ${APP_PATH}
-RUN apt update
-RUN apt install -y --no-install-recommends wget git \
+RUN apt update \
+ && apt install -y --no-install-recommends wget git \
   build-essential libffi-dev libssl-dev \
   zlib1g-dev liblzma-dev libbz2-dev libreadline-dev \
   libsqlite3-dev ca-certificates \

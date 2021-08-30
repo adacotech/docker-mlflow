@@ -1,0 +1,33 @@
+name: Push Image to DockerHub
+on:
+  release:
+    types:
+      - published
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'MLFlow version'
+        required: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: set version number
+        id: set-version
+        run: |
+          echo "::set-output name=version::$(echo ${{ github.ref }} | sed -e "s#refs/tags/##g")"
+      - name: Build, tag, and push image to DockerHub
+        env:
+          DOCKER_REGISTRY: adacotechjp
+          DOCKER_REPOSITORY: mlflow
+          IMAGE_TAG: ${{ github.event.inputs.version || steps.set-version.outputs.version }}
+        run: |
+          docker build --build-arg mlflow_version=$IMAGE_TAG -t $DOCKER_REGISTRY/$DOCKER_REPOSITORY:$IMAGE_TAG .
+          docker push $DOCKER_REGISTRY/$DOCKER_REPOSITORY:$IMAGE_TAG
