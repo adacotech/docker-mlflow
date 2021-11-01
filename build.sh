@@ -16,6 +16,7 @@ poetry install
 poetry add "mlflow==${mlflow_version}"
 apt remove -y build-essential git wget curl
 apt purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false
+rm -rf $HOME/.poetry
 rm -rf /var/lib/apt/lists/*
 find /usr/local -depth 		\( 			\( -type d -a \( -name test -o -name tests -o -name idle_test \) \) 			-o \( -type f -a \( -name '*.pyc' -o -name '*.pyo' -o -name '*.a' \) \) 		\) -exec rm -rf '{}' +
 find /usr/local -type f -executable -not \( -name '*tkinter*' \) -exec ldd '{}' ';' 		| awk '/=>/ { print $(NF-1) }' 		| sort -u 		| xargs -r dpkg-query --search 		| cut -d: -f1 		| sort -u 		| xargs -r apt-mark manual

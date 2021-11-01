@@ -16,4 +16,4 @@ WORKDIR ${APP_PATH}
 COPY . ${APP_PATH}
 RUN ./build.sh
 ENTRYPOINT [ "sh", "-c"]
-CMD ["poetry run mlflow server --host=0.0.0.0"]
+CMD ["mlflow server --host=0.0.0.0"]
