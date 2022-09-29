@@ -10,7 +10,7 @@ git clone https://github.com/pyenv/pyenv.git $PYENV_ROOT
 $PYENV_ROOT/plugins/python-build/install.sh
 /usr/local/bin/python-build -v $PYTHON_VERSION $PYTHON_ROOT
 rm -rf $PYENV_ROOT
-curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+curl -sSL https://install.python-poetry.org | python -
 poetry config virtualenvs.create false
 poetry install
 poetry add "mlflow==${mlflow_version}"
