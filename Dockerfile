@@ -4,7 +4,7 @@ ENV APP_PATH /opt/apps
 ENV HOME /root
 ENV PYTHON_VERSION 3.9.14
 ENV PYTHON_ROOT /usr/local/python-$PYTHON_VERSION
-ENV PATH $PYTHON_ROOT/bin:$HOME/.poetry/bin:$PATH
+ENV PATH $PYTHON_ROOT/bin:$HOME/.local/bin:$PATH
 ENV PYENV_ROOT $HOME/.pyenv
 ENV DEBIAN_FRONTEND noninteractive
 ARG mlflow_version
